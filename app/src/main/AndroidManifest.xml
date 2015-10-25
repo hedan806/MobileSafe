@@ -32,6 +32,18 @@
         <activity
             android:name=".ui.LostProtecteActivity"
             android:label="@string/lost_label" />
+        <activity
+            android:name=".ui.LostSetup1Activity"
+            android:label="@string/tv_lost_setup_1_label" />
+        <activity
+            android:name=".ui.LostSetup2Activity"
+            android:label="@string/tv_lost_setup_1_label" />
+        <activity
+            android:name=".ui.LostSetup3Activity"
+            android:label="@string/tv_lost_setup_1_label" />
+        <activity
+            android:name=".ui.LostSetup4Activity"
+            android:label="@string/tv_lost_setup_1_label" />
 
         <receiver android:name=".receiver.CallPhoneReceiver">
             <intent-filter android:priority="1000">

@@ -9,4 +9,18 @@
     <string name="name1">手机防盗</string>
     <string name="main_title">XX手机卫士</string>
     <string name="lost_label">手机防盗</string>
+    <string name="input_pwd">请输入密码</string>
+    <string name="input_repwd">请输入确认密码</string>
+    <string name="done">确定</string>
+    <string name="cancel">取消</string>
+    <string name="tv_lost_setup_1_title">1.欢迎使用防盗设置</string>
+    <string name="tv_lost_setup_1_info">您的手机防盗卫士：</string>
+    <string name="tv_lost_setup_1_li_1">sim卡变更报警</string>
+    <string name="tv_lost_setup_1_li_2">GPS追踪</string>
+    <string name="tv_lost_setup_1_li_3">销毁数据</string>
+    <string name="tv_lost_setup_1_li_4">远程锁屏</string>
+    <string name="tv_lost_setup_1_label">防盗向导01</string>
+    <string name="tv_lost_setup_2_title">2.</string>
+    <string name="tv_lost_setup_3_title">3.</string>
+    <string name="tv_lost_setup_4_title">4.</string>
 </resources>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dip">
+
+    <TextView
+        style="@style/text_title_style"
+        android:text="@string/tv_lost_setup_3_title" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:layout_marginTop="8dip"
+        android:minWidth="100dip"
+        android:src="@drawable/devide_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/text_info_style"
+            android:text="@string/tv_lost_setup_1_info" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dip"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView style="@style/img_list_style" />
+
+                <TextView
+                    style="@style/text_info_style"
+                    android:text="@string/tv_lost_setup_1_li_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView style="@style/img_list_style" />
+
+                <TextView
+                    style="@style/text_info_style"
+                    android:text="@string/tv_lost_setup_1_li_2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView style="@style/img_list_style" />
+
+                <TextView
+                    style="@style/text_info_style"
+                    android:text="@string/tv_lost_setup_1_li_3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView style="@style/img_list_style" />
+
+                <TextView
+                    style="@style/text_info_style"
+                    android:text="@string/tv_lost_setup_1_li_4" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal|bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            style="@style/img_status_off_style"/>
+        <ImageView
+            style="@style/img_status_off_style"/>
+        <ImageView
+            style="@style/img_status_on_style"/>
+        <ImageView
+            style="@style/img_status_off_style"/>
+    </LinearLayout>
+</LinearLayout>
