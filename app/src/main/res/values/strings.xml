@@ -20,7 +20,14 @@
     <string name="tv_lost_setup_1_li_3">销毁数据</string>
     <string name="tv_lost_setup_1_li_4">远程锁屏</string>
     <string name="tv_lost_setup_1_label">防盗向导01</string>
-    <string name="tv_lost_setup_2_title">2.</string>
-    <string name="tv_lost_setup_3_title">3.</string>
-    <string name="tv_lost_setup_4_title">4.</string>
+    <string name="tv_lost_setup_2_title">2.手机卡绑定 (sim卡的序列号)</string>
+    <string name="tv_lost_setup_3_title">3.设置安全号码</string>
+    <string name="tv_lost_setup_4_title">4.设置完成</string>
+    <string name="tv_lost_setup_2_info">每次开机启动发现手机sim改变自动发送报警短信:</string>
+    <string name="bt_lost_setup_2_bind">绑定</string>
+    <string name="tv_lost_setup_3_info">sim卡更换后,可以把报警发送到该安全号码上:</string>
+    <string name="bt_lost_setup_3_opencontacts">选择联系人</string>
+    <string name="tv_lost_setup_4_info">您的手机设置已经完成：</string>
+    <string name="tx_lost_setup_4_opensafe">保护未开启</string>
+    <string name="et_lost_setup_3_safephone">请输入手机号或选择联系人</string>
 </resources>

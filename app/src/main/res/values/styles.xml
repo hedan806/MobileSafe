@@ -7,7 +7,7 @@
     
     <style name="text_title_style">
         <item name="android:textColor" >@color/textcolor</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">27sp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

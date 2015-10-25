@@ -24,57 +24,29 @@
 
         <TextView
             style="@style/text_info_style"
-            android:text="@string/tv_lost_setup_1_info" />
+            android:text="@string/tv_lost_setup_2_info" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dip"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/bt_lost_setup_2_bind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/bt_lost_setup_2_bind"
+                    />
 
-                <ImageView style="@style/img_list_style" />
+               <CheckBox
+                   android:id="@+id/cb_lost_setup_2_bind"
+                   android:layout_weight="1"
+                   android:text="@string/bt_lost_setup_2_bind"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
 
-                <TextView
-                    style="@style/text_info_style"
-                    android:text="@string/tv_lost_setup_1_li_1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView style="@style/img_list_style" />
-
-                <TextView
-                    style="@style/text_info_style"
-                    android:text="@string/tv_lost_setup_1_li_2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView style="@style/img_list_style" />
-
-                <TextView
-                    style="@style/text_info_style"
-                    android:text="@string/tv_lost_setup_1_li_3" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView style="@style/img_list_style" />
-
-                <TextView
-                    style="@style/text_info_style"
-                    android:text="@string/tv_lost_setup_1_li_4" />
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
