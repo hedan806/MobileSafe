@@ -3,6 +3,7 @@ package com.hedan.mobilesafe.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 public class ContactSelectedActivity extends Activity {
 
+    private static final String TAG = "ContactSelectedActivity";
     private ListView lv;
     private List<ContactInfo> infos;
 
@@ -33,7 +35,7 @@ public class ContactSelectedActivity extends Activity {
 
         ContactInfoService service = new ContactInfoService(this);
         infos = service.getContactInfos();
-
+        Log.i(TAG,"infos:" + infos);
         lv = (ListView) this.findViewById(R.id.lv_contact_select);
         lv.setAdapter(new ContactSelecteAdapter());
 
@@ -68,6 +70,7 @@ public class ContactSelectedActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            Log.i(TAG, "getView invoke:" + position);
             ContactInfo info = infos.get(position);
             LinearLayout ll = new LinearLayout(ContactSelectedActivity.this);
             ll.setOrientation(LinearLayout.VERTICAL);

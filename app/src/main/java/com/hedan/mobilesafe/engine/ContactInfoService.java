@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import com.hedan.mobilesafe.domain.ContactInfo;
 
@@ -44,7 +45,7 @@ public class ContactInfoService {
             while (data.moveToNext()){
                 String data1 = data.getString(data.getColumnIndex(ContactsContract.Data.DATA1));
                 String type = data.getString(data.getColumnIndex(ContactsContract.Data.MIMETYPE));
-                //Log.i(TAG,"data1:" + data1 + " -- " + "type:" + type);
+                Log.i(TAG, "data1:" + data1 + " -- " + "type:" + type);
                 if(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE.equals(type)){
                     info.setPhone(data1);
                 }
