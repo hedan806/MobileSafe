@@ -38,7 +38,7 @@ public class LostSetup3Activity extends Activity{
         et_number = (EditText) this.findViewById(R.id.et_lost_setup_3_safephone);
         sp = this.getSharedPreferences("config", Context.MODE_APPEND);
 
-        et_number.setText(sp.getString("safenumber",""));
+        et_number.setText(sp.getString("safe_number",""));
 
         bt_select_contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +85,7 @@ public class LostSetup3Activity extends Activity{
 
                 }else{
                     SharedPreferences.Editor editor = sp.edit();
-                    editor.putString("safenumber",number);
+                    editor.putString("safe_number",number);
                     editor.commit();
                     Toast.makeText(getApplicationContext(),"保存成功",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LostSetup3Activity.this,LostSetup4Activity.class);

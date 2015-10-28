@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hedan.mobilesafe"
-    android:versionCode="2"
-    android:versionName="2.0">
-
-    <uses-sdk android:minSdkVersion="8" />
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -13,6 +11,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -36,24 +36,24 @@
             android:name=".ui.LostProtecteActivity"
             android:label="@string/lost_label" />
         <activity
-            android:name=".ui.LostSetup1Activity"
-            android:label="@string/tv_lost_setup_1_label" />
+            android:name=".ui.LostSetup1Activity"/>
         <activity
-            android:name=".ui.LostSetup2Activity"
-            android:label="@string/tv_lost_setup_1_label" />
+            android:name=".ui.LostSetup2Activity" />
         <activity
-            android:name=".ui.LostSetup3Activity"
-            android:label="@string/tv_lost_setup_1_label" />
+            android:name=".ui.LostSetup3Activity" />
         <activity
-            android:name=".ui.LostSetup4Activity"
-            android:label="@string/tv_lost_setup_1_label" />
+            android:name=".ui.LostSetup4Activity" />
         <activity
-            android:name=".ui.ContactSelectedActivity"
-            android:label="@string/tv_lost_setup_1_label" />
+            android:name=".ui.ContactSelectedActivity"/>
 
         <receiver android:name=".receiver.CallPhoneReceiver">
             <intent-filter android:priority="1000">
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.BootCompleteReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 

@@ -8,6 +8,7 @@ import com.hedan.mobilesafe.domain.UpdateInfo;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.InputStream;
+import java.io.StringReader;
 
 /**
  * Created by Administrator on 2015/10/19.
@@ -16,10 +17,10 @@ public class UpdateInfoParser {
 
     private static final String TAG = "UpdateInfoParser";
 
-    public static UpdateInfo getUpdateInfo(InputStream is) throws Exception{
+    public static UpdateInfo getUpdateInfo(String response) throws Exception{
         UpdateInfo info = new UpdateInfo();
         XmlPullParser parser = Xml.newPullParser();
-        parser.setInput(is, "utf-8");
+        parser.setInput(new StringReader(response));
         int type = parser.getEventType();
         while (type != XmlPullParser.END_DOCUMENT){
             switch (type){

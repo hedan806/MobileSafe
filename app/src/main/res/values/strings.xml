@@ -30,4 +30,6 @@
     <string name="tv_lost_setup_4_info">您的手机设置已经完成：</string>
     <string name="tx_lost_setup_4_opensafe">保护未开启</string>
     <string name="et_lost_setup_3_safephone">请输入手机号或选择联系人</string>
+    <string name="safe_name">安全手机号码:</string>
+    <string name="to_setup">进入设置向导</string>
 </resources>

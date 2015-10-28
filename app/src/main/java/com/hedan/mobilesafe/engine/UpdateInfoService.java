@@ -21,14 +21,14 @@ public class UpdateInfoService {
     }
 
     public UpdateInfo getUpdateInfo(int urlid) throws Exception{
-
+        UpdateInfo info = null;
         String path = context.getResources().getString(urlid);
         URL url = new URL(path);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(5000);
         conn.setRequestMethod("GET");
         InputStream is = conn.getInputStream();
-        return UpdateInfoParser.getUpdateInfo(is);
+        return info;
     }
 
 }
