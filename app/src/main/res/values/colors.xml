@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="item_background">#aa999999</color>
+    <color name="lost_main_color">#5542B8</color>
+    <color name="lost_main">#EEEEEE</color>
+    <color name="lost_li_selected">#E3E1E1</color>
 </resources>

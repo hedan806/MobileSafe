@@ -32,4 +32,6 @@
     <string name="et_lost_setup_3_safephone">请输入手机号或选择联系人</string>
     <string name="safe_name">安全手机号码:</string>
     <string name="to_setup">进入设置向导</string>
+    <string name="is_open">防盗保护已经开启：</string>
+    <string name="to_setup_again">重新进入设置向导</string>
 </resources>

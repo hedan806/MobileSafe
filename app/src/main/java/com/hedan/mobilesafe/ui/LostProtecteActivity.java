@@ -1,5 +1,6 @@
 package com.hedan.mobilesafe.ui;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -10,10 +11,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,11 @@ import com.hedan.mobilesafe.util.MD5Encoder;
  */
 public class LostProtecteActivity extends Activity implements View.OnClickListener {
 
+    private float x1 = 0 ;
+    private float x2 = 0 ;
+    private float y1 = 0;
+    private float y2 = 0;
+
     private static final String TAG = "LostProtecteActivity";
 
     private SharedPreferences sp;
@@ -33,11 +42,13 @@ public class LostProtecteActivity extends Activity implements View.OnClickListen
 
     private EditText et_pwd;
     private EditText et_repwd;
+    private ActionBar actionBar;
 
     private TextView tv_safe_number;
     private TextView tv_is_open;
     private CheckBox cb_is_open;
-    private Button bt_to_setup;
+    private LinearLayout bt_to_setup;
+    private ImageView return_icom;
 
 
     @Override
@@ -107,6 +118,7 @@ public class LostProtecteActivity extends Activity implements View.OnClickListen
                         editor.commit();
                         Toast.makeText(getApplicationContext(), "设置成功", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        showInputDialog();
                     } else {
                         Toast.makeText(getApplicationContext(), "两次密码不一样", Toast.LENGTH_SHORT).show();
                         return;
@@ -139,7 +151,10 @@ public class LostProtecteActivity extends Activity implements View.OnClickListen
                             tv_safe_number = (TextView) this.findViewById(R.id.tv_safe_number);
                             tv_is_open = (TextView) this.findViewById(R.id.tv_is_open);
                             cb_is_open = (CheckBox) this.findViewById(R.id.cb_is_open);
-                            bt_to_setup = (Button) this.findViewById(R.id.bt_to_setup);
+                            bt_to_setup = (LinearLayout) this.findViewById(R.id.ll_to_setup);
+                            return_icom = (ImageView) this.findViewById(R.id.return_icon);
+
+                            return_icom.setOnClickListener(this);
 
                             tv_safe_number.setText(sp.getString("safe_number", ""));
                             boolean is_open = sp.getBoolean("open_lost",false);
@@ -166,12 +181,41 @@ public class LostProtecteActivity extends Activity implements View.OnClickListen
                     }
                 }
                 break;
-            case R.id.bt_to_setup:
+            case R.id.ll_to_setup:
                 Intent intent = new Intent(this,LostSetup1Activity.class);
                 finish();
                 startActivity(intent);
                 break;
+            case R.id.return_icon:
+                finish();
+                overridePendingTransition(R.anim.left_iner,R.anim.left_outer);
+                break;
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            x1 = event.getX();
+            y1 = event.getY();
+        }
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            //当手指离开的时候
+            x2 = event.getX();
+            y2 = event.getY();
+            if(y1 - y2 > 50) {
+                Toast.makeText(getApplicationContext(), "向上滑", Toast.LENGTH_SHORT).show();
+            } else if(y2 - y1 > 50) {
+                Toast.makeText(getApplicationContext(), "向下滑", Toast.LENGTH_SHORT).show();
+            } else if(x1 - x2 > 50) {
+                //Toast.makeText(getApplicationContext(), "向左滑", Toast.LENGTH_SHORT).show();
+            } else if(x2 - x1 > 50) {
+                finish();
+                overridePendingTransition(R.anim.left_iner, R.anim.left_outer);
+//                Toast.makeText(getApplicationContext(), "向右滑", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return super.onTouchEvent(event);
     }
 
     /**

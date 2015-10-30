@@ -1,5 +1,6 @@
 package com.hedan.mobilesafe.ui;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -27,6 +28,8 @@ public class SplashActivity extends AppCompatActivity {
     private static final String TAG = "SplashActivity";
     private TextView tv_version;
     private LinearLayout ll;
+
+    private ActionBar actionBar ;
 
     private static final int SHOW_RESPONSE = 0;
 
@@ -82,6 +85,7 @@ public class SplashActivity extends AppCompatActivity {
         }).start();
 
 
+
     }
 
     /**
@@ -110,6 +114,7 @@ public class SplashActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        LogUtil.i(TAG,"获取更新信息异常");
                         Toast.makeText(getApplicationContext(), "获取更新信息失败", Toast.LENGTH_SHORT).show();
                         loadMainUI();
                     }

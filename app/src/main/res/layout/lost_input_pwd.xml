@@ -5,10 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/input_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/et_input_pwd"
         android:password="true"

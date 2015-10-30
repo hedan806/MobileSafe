@@ -42,7 +42,7 @@ public class LostSetup1Activity extends Activity{
                 Intent intent = new Intent(LostSetup1Activity.this,LostSetup2Activity.class);
                 finish();
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_in,R.anim.left_outer);
+                overridePendingTransition(R.anim.left_in,R.anim.left_out);
                 //Toast.makeText(getApplicationContext(), "向左滑", Toast.LENGTH_SHORT).show();
             } else if(x2 - x1 > 50) {
                 Toast.makeText(getApplicationContext(), "向右滑", Toast.LENGTH_SHORT).show();

@@ -103,13 +103,13 @@ public class LostSetup2Activity extends Activity implements View.OnClickListener
                 Intent intent = new Intent(LostSetup2Activity.this,LostSetup3Activity.class);
                 finish();
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_in,R.anim.left_outer);
+                overridePendingTransition(R.anim.left_in,R.anim.left_out);
                 //Toast.makeText(getApplicationContext(), "向左滑", Toast.LENGTH_SHORT).show();
             } else if(x2 - x1 > 50) {
                 Intent intent = new Intent(LostSetup2Activity.this,LostSetup1Activity.class);
                 finish();
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_out,R.anim.left_iner);
+                overridePendingTransition(R.anim.left_iner,R.anim.left_outer);
                 //Toast.makeText(getApplicationContext(), "向右滑", Toast.LENGTH_SHORT).show();
             }
         }

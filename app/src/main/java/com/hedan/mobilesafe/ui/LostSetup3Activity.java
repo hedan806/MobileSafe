@@ -91,14 +91,14 @@ public class LostSetup3Activity extends Activity{
                     Intent intent = new Intent(LostSetup3Activity.this,LostSetup4Activity.class);
                     finish();
                     startActivity(intent);
-                    overridePendingTransition(R.anim.left_in,R.anim.left_outer);
+                    overridePendingTransition(R.anim.left_in,R.anim.left_out);
                 }
                 //Toast.makeText(getApplicationContext(), "向左滑", Toast.LENGTH_SHORT).show();
             } else if(x2 - x1 > 50) {
                 Intent intent = new Intent(LostSetup3Activity.this,LostSetup2Activity.class);
                 finish();
                 startActivity(intent);
-                overridePendingTransition(R.anim.left_out,R.anim.left_iner);
+                overridePendingTransition(R.anim.left_iner,R.anim.left_outer);
                 //Toast.makeText(getApplicationContext(), "向右滑", Toast.LENGTH_SHORT).show();
             }
         }

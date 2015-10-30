@@ -3,7 +3,6 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-
     </style>
     
     <style name="text_title_style">
@@ -18,6 +17,12 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">5dip</item>
+    </style>
+    <style name="text_li_style">
+        <item name="android:textColor">@color/lost_main_color</item>
+        <item name="android:color">@color/lost_main_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="img_list_style">
         <item name="android:src">@android:drawable/btn_star_big_on</item>
