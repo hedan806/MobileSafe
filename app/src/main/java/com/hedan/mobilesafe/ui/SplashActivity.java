@@ -127,7 +127,7 @@ public class SplashActivity extends AppCompatActivity {
      * 加载主界面
      */
     private void loadMainUI() {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,MainContentActivity.class);
         finish();
         startActivity(intent);
         overridePendingTransition(R.anim.left_in,R.anim.left_out);

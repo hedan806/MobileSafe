@@ -38,7 +38,8 @@ public class MainUIAdapter extends BaseAdapter {
             ,"手机杀毒"
             ,"系统优化"
             ,"高级工具"
-            ,"设置中心"};
+            ,"设置中心"
+            ,"聊天界面测试"};
 
     private static int[] icons = {
             R.drawable.icon1
@@ -49,6 +50,7 @@ public class MainUIAdapter extends BaseAdapter {
             ,R.drawable.icon6
             ,R.drawable.icon7
             ,R.drawable.icon8
+            ,R.drawable.icon9
             ,R.drawable.icon9
     };
 

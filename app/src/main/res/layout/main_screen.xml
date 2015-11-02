@@ -4,31 +4,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffffff"
-    android:padding="10dp"
     >
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical|center_horizontal"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:textSize="22sp"
-            android:text="@string/main_title"
-            android:layout_height="30dp" />
+        android:layout_height="0dp">
 
-    </LinearLayout>
-    
-    <GridView
-        android:id="@+id/gv_main"
-        android:numColumns="3"
+    </FrameLayout>
+
+    <LinearLayout
+        android:background="@drawable/tab_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        >
-    </GridView>
+        android:layout_height="80dp">
+        <RelativeLayout
+            android:id="@+id/rl_msg_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_msg"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/message_unselected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:text="@string/tv_msg"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_content_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/contacts_unselected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:text="@string/tv_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_main_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_main"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/setting_unselected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_main"
+                    android:text="@string/tv_setting"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

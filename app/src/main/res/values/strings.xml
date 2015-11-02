@@ -34,4 +34,12 @@
     <string name="to_setup">进入设置向导</string>
     <string name="is_open">防盗保护已经开启：</string>
     <string name="to_setup_again">重新进入设置向导</string>
+    <string name="plase_input_something">请输入内容</string>
+    <string name="send">发送</string>
+    <string name="tv_msg">消息</string>
+    <string name="tv_setting">设置</string>
+    <string name="tv_content">联系人</string>
+    <string name="tv_message_content">这是消息界面</string>
+    <string name="tv_content_content">联系人界面</string>
+    <string name="tv_setting_content">这是设置界面</string>
 </resources>
