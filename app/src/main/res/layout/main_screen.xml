@@ -17,7 +17,7 @@
     <LinearLayout
         android:background="@drawable/tab_bg"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="70dp">
         <RelativeLayout
             android:id="@+id/rl_msg_layout"
             android:layout_width="0dp"
@@ -85,6 +85,30 @@
                 <TextView
                     android:id="@+id/tv_main"
                     android:text="@string/tv_setting"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_update_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_update"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/icon4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_update"
+                    android:text="@string/tv_update"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

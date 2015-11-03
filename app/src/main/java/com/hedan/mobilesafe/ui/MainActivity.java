@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.hedan.mobilesafe.R;
 import com.hedan.mobilesafe.adapter.MainUIAdapter;
+import com.hedan.mobilesafe.util.LogUtil;
 
 /**
  * Created by Administrator on 2015/10/20.
@@ -84,7 +85,7 @@ public class MainActivity extends Activity{
     private class ItemOnClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.i(TAG,"点击了" + position + ",");
+            Log.i(TAG,"点击了" + position );
             switch (position){
                 case 0 : //手机防盗
                     Log.i(TAG,"进入手机防盗界面");
@@ -96,9 +97,10 @@ public class MainActivity extends Activity{
                     startActivity(chatIntent);
                     break;
                 case 10 ://微信UI
+                    LogUtil.i(TAG,"进入微信UI界面1");
                     Intent wxIntent = new Intent(MainActivity.this,WXActivity.class);
                     startActivity(wxIntent);
-
+                    LogUtil.i(TAG,"进入微信UI界面2");
                     break;
             }
         }

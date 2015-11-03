@@ -19,12 +19,9 @@ public class WXActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.wx_toolbar);
 
-        toolbar.setLogo(R.drawable.logo_wx);
         toolbar.setTitle("微信");
 
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.logo_wx);
-
     }
 
 }

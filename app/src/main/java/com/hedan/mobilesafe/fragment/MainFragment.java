@@ -1,5 +1,6 @@
 package com.hedan.mobilesafe.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -7,8 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -21,6 +25,8 @@ import com.hedan.mobilesafe.R;
 import com.hedan.mobilesafe.adapter.MainUIAdapter;
 import com.hedan.mobilesafe.ui.ChatActivity;
 import com.hedan.mobilesafe.ui.LostProtecteActivity;
+import com.hedan.mobilesafe.ui.WXActivity;
+import com.hedan.mobilesafe.util.LogUtil;
 
 /**
  * Created by Administrator on 2015/11/2.
@@ -31,6 +37,7 @@ public class MainFragment extends Fragment {
 
     private MainUIAdapter adapter;
     private SharedPreferences sp ;
+    private AppCompatActivity parent ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,9 +48,23 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        sp = getActivity().getSharedPreferences("config", Context.MODE_APPEND);
-        gv_main = (GridView) getActivity().findViewById(R.id.gv_main);
-        adapter = new MainUIAdapter(getActivity());
+        parent = (AppCompatActivity) getActivity();
+
+        Toolbar toolbar = (Toolbar) parent.findViewById(R.id.toolbar);
+        toolbar.setTitle("手机卫士");
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                LogUtil.i(TAG,item.getItemId()+"");
+                return false;
+            }
+        });
+        parent.setSupportActionBar(toolbar);
+
+        sp = parent.getSharedPreferences("config", Context.MODE_APPEND);
+        gv_main = (GridView) parent.findViewById(R.id.gv_main);
+        adapter = new MainUIAdapter(parent);
+
         gv_main.setAdapter(adapter);
         gv_main.setOnItemClickListener(new ItemOnClickListener());
         gv_main.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -85,6 +106,7 @@ public class MainFragment extends Fragment {
             }
         });
     }
+
     private class ItemOnClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -98,6 +120,10 @@ public class MainFragment extends Fragment {
                 case 9://聊天界面测试
                     Intent chatIntent = new Intent(getActivity(),ChatActivity.class);
                     startActivity(chatIntent);
+                    break;
+                case 10:
+                    Intent wxIntent = new Intent(getActivity(), WXActivity.class);
+                    startActivity(wxIntent);
                     break;
             }
         }

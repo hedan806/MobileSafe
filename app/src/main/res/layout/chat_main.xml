@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/base_toolbar"/>
+
     <ListView
         android:id="@+id/lv_chat_msg"
         android:layout_weight="1"

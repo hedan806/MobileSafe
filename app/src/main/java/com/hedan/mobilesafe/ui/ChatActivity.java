@@ -2,6 +2,7 @@ package com.hedan.mobilesafe.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -26,6 +27,7 @@ public class ChatActivity extends Activity {
     private Button send;
     private MsgAdapter msgAdapter;
     private List<Message> msgList = new ArrayList<Message>();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,10 @@ public class ChatActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.chat_main);
         initMsg();//初始化信息
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("某某");
+        toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha);
 
         msgAdapter = new MsgAdapter(ChatActivity.this,R.layout.msg_item,msgList);
         et_msg = (EditText) this.findViewById(R.id.et_input_msg);
@@ -54,6 +60,8 @@ public class ChatActivity extends Activity {
             }
         });
     }
+
+
 
     private void initMsg() {
         Message m1 = new Message("哇偶 man",Message.TYPE_RECE);

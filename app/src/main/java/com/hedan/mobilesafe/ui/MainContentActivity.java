@@ -20,7 +20,7 @@ import com.hedan.mobilesafe.fragment.MessageFragment;
 /**
  * Created by Administrator on 2015/11/2.
  */
-public class MainContentActivity extends Activity implements View.OnClickListener{
+public class MainContentActivity extends AppCompatActivity implements View.OnClickListener{
 
     private MainFragment mainFragment;
     private MessageFragment messageFragment;
@@ -57,13 +57,13 @@ public class MainContentActivity extends Activity implements View.OnClickListene
         hideFragment(transaction);
         switch (i){
             case 0:
-                iv_message.setImageResource(R.drawable.message_selected);
+                iv_message.setImageResource(R.drawable.icon1);
                 tv_message.setTextColor(Color.WHITE);
-                if(messageFragment == null){
-                    messageFragment = new MessageFragment();
-                    transaction.add(R.id.fl_content,messageFragment);
+                if(mainFragment == null){
+                    mainFragment = new MainFragment();
+                    transaction.add(R.id.fl_content,mainFragment);
                 }else{
-                    transaction.show(messageFragment);
+                    transaction.show(mainFragment);
                 }
                 break;
             case 1:

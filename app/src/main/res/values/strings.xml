@@ -44,4 +44,5 @@
     <string name="tv_setting_content">这是设置界面</string>
     <string name="wx_label">微信</string>
     <string name="wx_menu_search">搜索</string>
+    <string name="tv_update">软件管理</string>
 </resources>
