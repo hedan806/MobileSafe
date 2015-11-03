@@ -1,12 +1,11 @@
 package com.hedan.mobilesafe.ui;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -23,13 +22,13 @@ import com.hedan.mobilesafe.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     private static final String TAG = "SplashActivity";
     private TextView tv_version;
     private LinearLayout ll;
 
-    private ActionBar actionBar ;
+    private android.support.v7.app.ActionBar actionBar ;
 
     private static final int SHOW_RESPONSE = 0;
 

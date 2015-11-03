@@ -91,9 +91,14 @@ public class MainActivity extends Activity{
                     Intent intent = new Intent(MainActivity.this,LostProtecteActivity.class);
                     startActivity(intent);
                     break;
-                case 9://聊天界面测试
+                case 9 ://聊天界面测试
                     Intent chatIntent = new Intent(MainActivity.this,ChatActivity.class);
                     startActivity(chatIntent);
+                    break;
+                case 10 ://微信UI
+                    Intent wxIntent = new Intent(MainActivity.this,WXActivity.class);
+                    startActivity(wxIntent);
+
                     break;
             }
         }

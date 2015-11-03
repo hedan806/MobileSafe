@@ -4,4 +4,8 @@
     <color name="lost_main_color">#5542B8</color>
     <color name="lost_main">#EEEEEE</color>
     <color name="lost_li_selected">#E3E1E1</color>
+
+    <color name="material_blue_500">#009688</color>
+    <color name="material_blue_700">#00796B</color>
+    <color name="material_green_A200">#FD87A9</color>
 </resources>

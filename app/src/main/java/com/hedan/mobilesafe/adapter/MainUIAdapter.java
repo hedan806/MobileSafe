@@ -39,7 +39,8 @@ public class MainUIAdapter extends BaseAdapter {
             ,"系统优化"
             ,"高级工具"
             ,"设置中心"
-            ,"聊天界面测试"};
+            ,"聊天界面测试"
+            ,"微信界面UI"};
 
     private static int[] icons = {
             R.drawable.icon1
@@ -52,6 +53,7 @@ public class MainUIAdapter extends BaseAdapter {
             ,R.drawable.icon8
             ,R.drawable.icon9
             ,R.drawable.icon9
+            ,R.drawable.icon7
     };
 
     @Override

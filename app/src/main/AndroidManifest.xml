@@ -20,9 +20,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.MainContentActivity">
-
-        </activity>
         <activity
             android:name=".ui.SplashActivity"
             android:label="@string/app_name">
@@ -32,18 +29,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.MainContentActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity
-            android:name=".ui.LostProtecteActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity android:name=".ui.LostProtecteActivity" />
         <activity android:name=".ui.LostSetup1Activity" />
         <activity android:name=".ui.LostSetup2Activity" />
         <activity android:name=".ui.LostSetup3Activity" />
         <activity android:name=".ui.LostSetup4Activity" />
         <activity android:name=".ui.ContactSelectedActivity" />
-        <activity android:name=".ui.ChatActivity" >
+        <activity android:name=".ui.ChatActivity" />
+        <activity
+            android:name=".ui.WXActivity"
+            android:label="@string/wx_label"
+            android:logo="@drawable/logo_wx" />
 
-        </activity>
 
         <receiver android:name=".receiver.CallPhoneReceiver">
             <intent-filter android:priority="1000">
