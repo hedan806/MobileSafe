@@ -2,6 +2,8 @@ package com.hedan.mobilesafe.engine;
 
 import android.app.ProgressDialog;
 
+import com.hedan.mobilesafe.util.LogUtil;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -13,11 +15,18 @@ import java.net.URL;
  */
 public class DownLoadFileService {
 
+    private static final String TAG = DownLoadFileService.class.getSimpleName();
+
     public File getFile(String path,String filepath,ProgressDialog pd) throws Exception{
+        LogUtil.i(TAG,"path : " + path);
         URL url = new URL(path);
+        LogUtil.i(TAG,"url : " + url.getContent());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        LogUtil.i(TAG,"conn : " + conn.getResponseCode());
         conn.setRequestMethod("GET");
-        conn.setConnectTimeout(5000);
+        LogUtil.i(TAG, "code:" + conn.getResponseCode());
+        conn.setConnectTimeout(3000);
+        conn.setReadTimeout(3000);
         if(conn.getResponseCode() == 200){
             pd.setMax(conn.getContentLength());
             InputStream is = conn.getInputStream();
@@ -29,14 +38,16 @@ public class DownLoadFileService {
             while ((len = is.read(buf)) != -1){
                 fos.write(buf,0 ,len);
                 process += len;
+                LogUtil.i(TAG,"len : " + len);
                 pd.setProgress(process);
-                Thread.sleep(500);
+                Thread.sleep(10);
             }
             fos.flush();
             fos.close();
             is.close();
             return file;
         }
+        LogUtil.i(TAG,"return null");
         return null;
     }
 

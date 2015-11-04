@@ -47,6 +47,7 @@
             android:name=".ui.WXActivity"
             android:label="@string/wx_label"
             android:logo="@drawable/logo_wx" />
+        <activity android:name=".ui.AtoolsActivity"></activity>
 
 
         <receiver android:name=".receiver.CallPhoneReceiver">

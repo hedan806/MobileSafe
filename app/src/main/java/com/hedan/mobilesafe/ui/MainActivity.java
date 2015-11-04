@@ -92,6 +92,11 @@ public class MainActivity extends Activity{
                     Intent intent = new Intent(MainActivity.this,LostProtecteActivity.class);
                     startActivity(intent);
                     break;
+                case 7 :
+                    LogUtil.i(TAG,"进入高级工具");
+                    Intent aToolsIntent = new Intent(MainActivity.this,AtoolsActivity.class);
+                    startActivity(aToolsIntent);
+                    break;
                 case 9 ://聊天界面测试
                     Intent chatIntent = new Intent(MainActivity.this,ChatActivity.class);
                     startActivity(chatIntent);

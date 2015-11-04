@@ -45,4 +45,8 @@
     <string name="wx_label">微信</string>
     <string name="wx_menu_search">搜索</string>
     <string name="tv_update">软件管理</string>
+    <string name="tv_query_number">手机归属地查询</string>
+    <string name="et_query_number">请输入查询的手机号</string>
+    <string name="bt_query">查询</string>
+    <string name="addressdburl">http://192.168.1.44:8080/address.db</string>
 </resources>
