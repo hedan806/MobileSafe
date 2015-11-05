@@ -36,7 +36,7 @@ public class ChatActivity extends Activity {
         setContentView(R.layout.chat_main);
         initMsg();//初始化信息
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.id_base_toolbar);
         toolbar.setTitle("某某");
         toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha);
 

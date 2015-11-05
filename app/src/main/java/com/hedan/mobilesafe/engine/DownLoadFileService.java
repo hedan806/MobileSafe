@@ -20,11 +20,11 @@ public class DownLoadFileService {
     public File getFile(String path,String filepath,ProgressDialog pd) throws Exception{
         LogUtil.i(TAG,"path : " + path);
         URL url = new URL(path);
-        LogUtil.i(TAG,"url : " + url.getContent());
+//        LogUtil.i(TAG,"url : " + url.getPath());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        LogUtil.i(TAG,"conn : " + conn.getResponseCode());
+//        LogUtil.i(TAG,"conn : " + conn.getResponseCode());
         conn.setRequestMethod("GET");
-        LogUtil.i(TAG, "code:" + conn.getResponseCode());
+//        LogUtil.i(TAG, "code:" + conn.getResponseCode());
         conn.setConnectTimeout(3000);
         conn.setReadTimeout(3000);
         if(conn.getResponseCode() == 200){

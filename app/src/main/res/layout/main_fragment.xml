@@ -4,21 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/base_toolbar"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="vertical"
-        android:gravity="center_vertical|center_horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:textSize="22sp"
-            android:text="@string/main_title"
-            android:layout_height="30dp" />
-
-    </LinearLayout>
-
     <GridView
         android:id="@+id/gv_main"
         android:numColumns="3"

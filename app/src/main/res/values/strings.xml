@@ -50,4 +50,8 @@
     <string name="bt_query">查询</string>
     <string name="addressdburl">http://192.168.1.44:8080/address.db</string>
     <string name="wiki_title">维基互联</string>
+    <string name="username">用户名</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_message">消息</string>
+    <string name="to_main">主界面</string>
 </resources>

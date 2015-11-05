@@ -15,8 +15,7 @@
         <item name="colorPrimary">#673AB7</item>
         <item name="colorPrimaryDark">#512DA8</item>
         <item name="colorAccent">#FF4081</item>
-        <item name="android:windowBackground">@color/window_background</item>
-        <item name="android:textColor">@android:color/white</item>
+        <!--<item name="android:windowBackground">@color/window_background</item>-->
     </style>
 
     <style name="text_title_style">
@@ -55,5 +54,5 @@
     </style>
 
 
-    <color name="window_background">#FFF5F5F5</color>
+    <color name="window_background">#fff5f5f5</color>
 </resources>

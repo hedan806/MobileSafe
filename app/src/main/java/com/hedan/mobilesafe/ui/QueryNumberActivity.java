@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hedan.mobilesafe.R;
+import com.hedan.mobilesafe.engine.NumberAddressService;
 import com.hedan.mobilesafe.util.LogUtil;
 
 /**
@@ -53,7 +54,9 @@ public class QueryNumberActivity extends Activity implements View.OnClickListene
                     Toast.makeText(getApplicationContext(),"要查询的手机号不能为空",Toast.LENGTH_SHORT).show();
                     return ;
                 }else{
-
+                    String address = NumberAddressService.getAddress(number);
+                    LogUtil.i(TAG,"号码归属地：" + address);
+                    tv_query_result.setText("号码归属地：" + address);
                 }
                 break;
         }

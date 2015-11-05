@@ -55,6 +55,7 @@
 
         <activity android:name=".ui.NavigationViewActivity"
             android:label="@string/wiki_title"
+            android:icon="@drawable/logo_wiki"
             android:theme="@style/Theme.Design">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

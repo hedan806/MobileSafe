@@ -2,7 +2,7 @@
 <resources>
     <color name="item_background">#aa999999</color>
     <color name="lost_main_color">#5542B8</color>
-    <color name="lost_main">#EEEEEE</color>
+    <color name="lost_main">#CCCCCC</color>
     <color name="lost_li_selected">#E3E1E1</color>
 
     <color name="material_blue_500">#009688</color>

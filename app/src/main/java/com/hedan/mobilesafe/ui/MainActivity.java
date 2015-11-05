@@ -96,6 +96,7 @@ public class MainActivity extends Activity{
                     LogUtil.i(TAG,"进入高级工具");
                     Intent aToolsIntent = new Intent(MainActivity.this,AtoolsActivity.class);
                     startActivity(aToolsIntent);
+                    overridePendingTransition(R.anim.left_in,R.anim.left_out);
                     break;
                 case 9 ://聊天界面测试
                     Intent chatIntent = new Intent(MainActivity.this,ChatActivity.class);

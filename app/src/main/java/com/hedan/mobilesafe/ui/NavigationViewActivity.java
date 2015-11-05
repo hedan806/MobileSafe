@@ -1,5 +1,6 @@
 package com.hedan.mobilesafe.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,8 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.hedan.mobilesafe.R;
 import com.hedan.mobilesafe.util.LogUtil;
@@ -19,59 +23,66 @@ import com.hedan.mobilesafe.util.LogUtil;
 public class NavigationViewActivity extends AppCompatActivity {
 
     private static final String TAG = NavigationViewActivity.class.getSimpleName();
+
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private Button toMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_view);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.id_dl);
-        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
+        setContentView(R.layout.navigation_view);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawerLayout);
+        mNavigationView = (NavigationView) findViewById(R.id.id_nav_view);
+        toMain = (Button) findViewById(R.id.id_to_main);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
         setSupportActionBar(toolbar);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        setupDrawerContent(mNavigationView);
-
+        setupNavigation(mNavigationView);
+        toMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(NavigationViewActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+            }
+        });
     }
 
-    private void setupDrawerContent(NavigationView navigationView)
-    {
-        navigationView.setNavigationItemSelectedListener(
-
-                new NavigationView.OnNavigationItemSelectedListener() {
-
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
-                        return true;
-                    }
-                });
+    private void setupNavigation(NavigationView mNavigationView) {
+        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                LogUtil.i(TAG,"click menuItem : " + menuItem.getItemId());
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_navigation_view, menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_splash,menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        LogUtil.i(TAG,"click item : " + item.getItemId());
-        if(item.getItemId() == android.R.id.home)
-        {
-            mDrawerLayout.openDrawer(GravityCompat.START);
-            return true ;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        LogUtil.i(TAG,"click item Id : " + item.getItemId());
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

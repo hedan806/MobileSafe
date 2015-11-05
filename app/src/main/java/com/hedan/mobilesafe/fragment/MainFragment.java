@@ -50,7 +50,7 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         parent = (AppCompatActivity) getActivity();
 
-        Toolbar toolbar = (Toolbar) parent.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) parent.findViewById(R.id.id_base_toolbar);
         toolbar.setTitle("手机卫士");
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
