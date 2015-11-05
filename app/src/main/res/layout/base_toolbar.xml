@@ -8,6 +8,7 @@
     android:layout_height="50dp"
     android:minHeight="?attr/actionBarSize"
     app:theme = "@style/ThemeOverlay.AppCompat.ActionBar"
+    app:navigationIcon="?attr/homeAsUpIndicator"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     android:background="?attr/colorPrimary">
 

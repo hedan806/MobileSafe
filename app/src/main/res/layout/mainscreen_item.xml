@@ -20,7 +20,7 @@
         android:id="@+id/tv_main_name"
         android:text="@string/app_name"
         android:textSize="18sp"
-        android:textColor="@color/textcolor"
+        android:textColor="@color/lost_main"
         />
 
 </LinearLayout>
