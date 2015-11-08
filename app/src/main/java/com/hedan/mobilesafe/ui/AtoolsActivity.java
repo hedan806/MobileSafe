@@ -7,16 +7,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelUuid;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hedan.mobilesafe.R;
 import com.hedan.mobilesafe.engine.DownLoadFileService;
+import com.hedan.mobilesafe.service.AddressService;
 import com.hedan.mobilesafe.util.HttpCallbackListener;
 import com.hedan.mobilesafe.util.HttpUtil;
 import com.hedan.mobilesafe.util.LogUtil;
@@ -26,11 +31,13 @@ import java.io.File;
 /**
  * Created by Administrator on 2015/11/4.
  */
-public class AtoolsActivity extends AppCompatActivity implements View.OnClickListener {
+public class AtoolsActivity extends ToolbarActivity implements View.OnClickListener {
     private static final String TAG = AtoolsActivity.class.getSimpleName();
 
     private TextView tv_query_number;
+    private Switch phone_address;
     private ProgressDialog pd;
+    private Intent serviceIntent;
 
     private static final int SUCCESS = 10;
     private static final int ERROR = 11;
@@ -56,29 +63,41 @@ public class AtoolsActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.atools_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.id_base_toolbar);
-        toolbar.setTitle("高级工具");
-        setSupportActionBar(toolbar);
-
-        tv_query_number = (TextView) findViewById(R.id.tv_query_number);
+        serviceIntent = new Intent(AtoolsActivity.this, AddressService.class);
+        initView();
         tv_query_number.setOnClickListener(this);
+        phone_address.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    LogUtil.i(TAG,"Switch Open!");
+                    startService(serviceIntent);
+                }else{
+                    LogUtil.i(TAG,"Switch Close!");
+                    stopService(serviceIntent);
+                }
+            }
+        });
+    }
+
+    /**
+     * 初始化控件
+     */
+    private void initView() {
+        tv_query_number = (TextView) findViewById(R.id.tv_query_number);
+        phone_address = (Switch) findViewById(R.id.id_phone_address);
+    }
+
+    @Override
+    public void onCreateCustomToolbar(Toolbar toolbar) {
+        getSupportActionBar().setTitle("高级工具");
+        super.onCreateCustomToolbar(toolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        LogUtil.i(TAG,"click item id : " + item.getItemId());
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                overridePendingTransition(R.anim.left_iner,R.anim.left_outer);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -94,8 +113,6 @@ public class AtoolsActivity extends AppCompatActivity implements View.OnClickLis
                 }else{
                     //提示用户下载
                     pd = new ProgressDialog(this);
-                    pd.setMessage("正在下载...");
-                    pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                     pd.setCancelable(false);
                     //下载文件
                     pd.show();
@@ -106,41 +123,20 @@ public class AtoolsActivity extends AppCompatActivity implements View.OnClickLis
                             boolean sdCardIsRead = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
                             LogUtil.i(TAG,"sdcard is open : " + sdCardIsRead);
                             if(sdCardIsRead){
-                                String filepath = Environment.getExternalStorageDirectory().getPath() + "address.db";//"/sdcard/address.db";
-                                HttpUtil.sendHttpRequest(path, new HttpCallbackListener() {
+                                String filepath = Environment.getExternalStorageDirectory().getPath() + "/address.db";//"/sdcard/address.db";
+                                HttpUtil.sendHttpRequestFile(path,filepath,pd, new HttpCallbackListener() {
                                     @Override
-                                    public void onFinish(String response) throws Exception {
-                                        pd.dismiss();
+                                    public void onFinish(Object response) throws Exception {
                                         LogUtil.i(TAG,"response str : " + response);
                                         handler.sendEmptyMessage(SUCCESS);
                                     }
 
                                     @Override
                                     public void onError(Exception e) {
-                                        pd.dismiss();
                                         LogUtil.i(TAG, "error : " + e.getMessage());
                                         handler.sendEmptyMessage(ERROR);
                                     }
                                 });
-                                /*try {
-                                    LogUtil.i(TAG, "start download");
-
-                                    DownLoadFileService service = new DownLoadFileService();
-                                    File file = service.getFile(path, filepath, pd);
-                                    LogUtil.i(TAG, "file name : " + file.getName());
-                                    pd.dismiss();
-                                    LogUtil.i(TAG, "end download");
-                                    Message msg = new Message();
-                                    msg.what = SUCCESS;
-                                    handler.handleMessage(msg);
-                                } catch (Exception e) {
-                                    pd.dismiss();
-                                    LogUtil.i(TAG,"error begin");
-                                    Message msg = new Message();
-                                    msg.what = ERROR;
-                                    handler.handleMessage(msg);
-                                    e.printStackTrace();
-                                }*/
                             }else{
                                 Toast.makeText(getApplicationContext(),"SD卡不可用，无法下载",Toast.LENGTH_SHORT).show();
                                 return ;
@@ -153,7 +149,9 @@ public class AtoolsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private boolean isDBexist() {
-        File file = new File(Environment.getExternalStorageDirectory().getPath() + "address.db");
+        String root = Environment.getExternalStorageDirectory().getPath();
+        LogUtil.i(TAG,"root path : " + root);
+        File file = new File(root + "/address.db");
         return file.exists();
     }
 }

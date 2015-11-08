@@ -44,6 +44,7 @@
         <activity android:name=".ui.LostSetup4Activity" />
         <activity android:name=".ui.ContactSelectedActivity" />
         <activity android:name=".ui.ChatActivity" />
+        <activity android:name=".ui.QueryNumberActivity"></activity>
         <activity
             android:name=".ui.WXActivity"
             android:label="@string/wx_label"
@@ -64,6 +65,7 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".service.AddressService"></service>
 
         <receiver android:name=".receiver.CallPhoneReceiver">
             <intent-filter android:priority="1000">

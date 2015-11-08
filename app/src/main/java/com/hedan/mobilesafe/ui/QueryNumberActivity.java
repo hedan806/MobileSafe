@@ -2,7 +2,11 @@ package com.hedan.mobilesafe.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,12 +22,11 @@ import com.hedan.mobilesafe.util.LogUtil;
 /**
  * Created by Administrator on 2015/11/4.
  */
-public class QueryNumberActivity extends Activity implements View.OnClickListener {
+public class QueryNumberActivity extends ToolbarActivity implements View.OnClickListener {
     private static final String TAG = QueryNumberActivity.class.getSimpleName();
     private EditText et_query_number;
     private Button bt_query;
     private TextView tv_query_result;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,12 @@ public class QueryNumberActivity extends Activity implements View.OnClickListene
         setContentView(R.layout.atools_query_number);
         initView();
         bt_query.setOnClickListener(this);
+    }
+
+    @Override
+    public void onCreateCustomToolbar(Toolbar toolbar) {
+        getSupportActionBar().setTitle("号码归属地查询");
+        super.onCreateCustomToolbar(toolbar);
     }
 
     /**
@@ -44,18 +53,18 @@ public class QueryNumberActivity extends Activity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bt_query:
-                LogUtil.i(TAG,"查询号码归属地");
+                LogUtil.i(TAG, "查询号码归属地");
                 String number = et_query_number.getText().toString().trim();
-                if(TextUtils.isEmpty(number)){
-                    Animation animation = AnimationUtils.loadAnimation(this,R.anim.shake);
+                if (TextUtils.isEmpty(number)) {
+                    Animation animation = AnimationUtils.loadAnimation(this, R.anim.shake);
                     et_query_number.startAnimation(animation);
-                    Toast.makeText(getApplicationContext(),"要查询的手机号不能为空",Toast.LENGTH_SHORT).show();
-                    return ;
-                }else{
+                    Toast.makeText(getApplicationContext(), "要查询的手机号不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
                     String address = NumberAddressService.getAddress(number);
-                    LogUtil.i(TAG,"号码归属地：" + address);
+                    LogUtil.i(TAG, "号码归属地：" + address);
                     tv_query_result.setText("号码归属地：" + address);
                 }
                 break;

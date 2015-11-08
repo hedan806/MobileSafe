@@ -54,4 +54,6 @@
     <string name="nav_home">首页</string>
     <string name="nav_message">消息</string>
     <string name="to_main">主界面</string>
+    <string name="atools_title">高级工具</string>
+    <string name="phone_address">来电归属地显示：</string>
 </resources>

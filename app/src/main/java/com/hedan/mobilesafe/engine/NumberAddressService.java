@@ -25,11 +25,13 @@ public class NumberAddressService {
     public static String getAddress(String number){
         String regex = "^1[34578]\\d{9}$";
         String address = number;
+        String sql = "";
+        db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "/address.db");
         if(number.matches(regex)){
             LogUtil.i(TAG,"输入的为手机号码");
-            db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
             if(db.isOpen()){
-                cursor = db.rawQuery("select city from info where mobileprefix=?", new String[]{number.substring(0, 7)});
+                sql = "select city from info where mobileprefix=?";
+                cursor = db.rawQuery(sql, new String[]{number.substring(0, 7)});
                 if(cursor.moveToNext()){
                     address = cursor.getString(0);
                 }
@@ -48,9 +50,10 @@ public class NumberAddressService {
                     address = "本地号码";
                     break;
                 case 10://3位区号，7位电话号码
-                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
+//                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "/address.db");
                     if(db.isOpen()) {
-                        cursor = db.rawQuery("select city from info where area=? limit 1", new String[]{number.substring(0, 3)});
+                        sql = "select city from info where area=? limit 1";
+                        cursor = db.rawQuery(sql, new String[]{number.substring(0, 3)});
                         if (cursor.moveToNext()) {
                             address = cursor.getString(0);
                         }
@@ -59,13 +62,15 @@ public class NumberAddressService {
                     }
                     break;
                 case 11://4位区号，7位电话号码 或者 3位区号，8位电话号码
-                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
+//                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
                     if(db.isOpen()) {
-                        cursor = db.rawQuery("select city from info where area=? limit 1", new String[]{number.substring(0, 3)});
+                        sql = "select city from info where area=? limit 1";
+                        cursor = db.rawQuery(sql, new String[]{number.substring(0, 3)});
                         if (cursor.moveToNext()) {
                             address = cursor.getString(0);
                         }
-                        Cursor cursor2 = db.rawQuery("select city from info where area=? limit 1", new String[]{number.substring(0, 4)});
+                        sql = "select city from info where area=? limit 1";
+                        Cursor cursor2 = db.rawQuery(sql, new String[]{number.substring(0, 4)});
                         if (cursor.moveToNext()) {
                             address = cursor2.getString(0);
                         }
@@ -75,9 +80,10 @@ public class NumberAddressService {
                     }
                     break;
                 case 12 ://4位区号，8位电话号码
-                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
+//                    db = AddressDao.getAddress(Environment.getExternalStorageDirectory().getPath() + "address.db");
                     if(db.isOpen()) {
-                        cursor = db.rawQuery("select city from info where area=? limit 1", new String[]{number.substring(0, 4)});
+                        sql = "select city from info where area=? limit 1";
+                        cursor = db.rawQuery(sql, new String[]{number.substring(0, 4)});
                         if (cursor.moveToNext()) {
                             address = cursor.getString(0);
                         }
@@ -87,6 +93,7 @@ public class NumberAddressService {
                     break;
             }
         }
+        LogUtil.i(TAG,"sql Str : " + sql);
         return address;
     }
 

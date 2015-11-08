@@ -94,10 +94,10 @@ public class SplashActivity extends Activity {
      */
     private void isNeedUpdate(final String version){
         String path = getResources().getString(R.string.updateurl);
-        HttpUtil.sendHttpRequest(path, new HttpCallbackListener() {
+        HttpUtil.sendHttpRequestStr(path, new HttpCallbackListener() {
             @Override
-            public void onFinish(String response) throws Exception {
-                info = UpdateInfoParser.getUpdateInfo(response);
+            public void onFinish(Object response) throws Exception {
+                info = UpdateInfoParser.getUpdateInfo(String.valueOf(response));
                 String up_version = info.getVersion();
                 if (up_version.equalsIgnoreCase(version)) {
                     LogUtil.i(TAG, "版本相同，无需升级");

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +23,7 @@ import com.hedan.mobilesafe.util.LogUtil;
 /**
  * Created by Administrator on 2015/10/20.
  */
-public class MainActivity extends Activity{
+public class MainActivity extends ToolbarActivity{
 
     private static final String TAG = "MainActivity";
 
@@ -110,5 +111,11 @@ public class MainActivity extends Activity{
                     break;
             }
         }
+    }
+
+    @Override
+    public void onCreateCustomToolbar(Toolbar toolbar) {
+        super.onCreateCustomToolbar(toolbar);
+        getSupportActionBar().setTitle("手机安全卫士");
     }
 }
