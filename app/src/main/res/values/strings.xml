@@ -56,4 +56,7 @@
     <string name="to_main">主界面</string>
     <string name="atools_title">高级工具</string>
     <string name="phone_address">来电归属地显示：</string>
+    <string name="address_drag">设置来电归属地位置</string>
+    <string name="address_style">设置来电归属地样式</string>
+    <string name="address_drag_desc">按住提示框拖动到任意位置\n返回立即生效</string>
 </resources>
