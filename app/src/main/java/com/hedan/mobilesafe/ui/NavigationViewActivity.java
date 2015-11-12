@@ -20,13 +20,14 @@ import com.hedan.mobilesafe.util.LogUtil;
 /**
  * Created by Administrator on 2015/11/5.
  */
-public class NavigationViewActivity extends AppCompatActivity {
+public class NavigationViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = NavigationViewActivity.class.getSimpleName();
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Button toMain;
+    private Button toList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class NavigationViewActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawerLayout);
         mNavigationView = (NavigationView) findViewById(R.id.id_nav_view);
         toMain = (Button) findViewById(R.id.id_to_main);
+        toList = (Button)findViewById(R.id.id_to_list);
 
 
 
@@ -48,14 +50,8 @@ public class NavigationViewActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         setupNavigation(mNavigationView);
-        toMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(NavigationViewActivity.this, MainActivity.class);
-                startActivity(mainIntent);
-                overridePendingTransition(R.anim.left_in, R.anim.left_out);
-            }
-        });
+        toMain.setOnClickListener(this);
+        toList.setOnClickListener(this);
     }
 
     private void setupNavigation(NavigationView mNavigationView) {
@@ -85,5 +81,21 @@ public class NavigationViewActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.id_to_main:
+                Intent mainIntent = new Intent(NavigationViewActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                break;
+            case R.id.id_to_list:
+                Intent listIntent = new Intent(NavigationViewActivity.this, CallSmsSafeActivity.class);
+                startActivity(listIntent);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                break;
+        }
     }
 }

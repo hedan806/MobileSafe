@@ -14,15 +14,23 @@ public class GreenDaoGenerator {
         Schema schema = new Schema(1, "com.hedan.dao");
         addNote(schema);
         addCustomerOrder(schema);
+        addBlackNumber(schema);
 
         /**
          * 第一个参数是Schema对象，第二个参数是希望自动生成的代码对应的项目路径。
-         试了下src-gen这个文件夹必须手动创建,这里路径如果错了会抛出异常。
+         试了下src-gen这个文件夹必须手动创建,这里路径如果错了会抛出异常。gram comes with ABSOLUTELY NO WARRANTY
          好了先别慌运行这段程序。新建一个Android项目名字是DaoExample，和刚才的JAVA项目保持在同一个文件夹下。
          接着就可以运行刚才的JAVA程序，会看到src-gen下面自动生成了8个文件，3个实体对象，3个dao，1个DaoMaster,
          1个DaoSession
          */
         new DaoGenerator().generateAll(schema, "app/src/main/java-gen");
+    }
+
+    private static void addBlackNumber(Schema schema) {
+        Entity blackNumber = schema.addEntity("BlackNumber");
+        blackNumber.addIdProperty().autoincrement();
+        blackNumber.addStringProperty("phone").notNull();
+        blackNumber.addDateProperty("ctime").notNull();
     }
 
     private static void addCustomerOrder(Schema schema) {

@@ -6,6 +6,7 @@ import android.provider.SyncStateContract;
 
 import com.hedan.dao.DaoMaster;
 import com.hedan.dao.DaoSession;
+import com.hedan.mobilesafe.db.BaseDaoHelper;
 import com.hedan.mobilesafe.util.Constants;
 
 /**
@@ -31,7 +32,7 @@ public class BaseApplication extends Application {
      */
     public static DaoMaster getDaoMaster(Context context) {
         if (daoMaster == null) {
-            DaoMaster.OpenHelper helper = new DaoMaster.DevOpenHelper(context, Constants.DB_NAME, null);
+            DaoMaster.OpenHelper helper = new BaseDaoHelper(context, Constants.DB_NAME, null);
             daoMaster = new DaoMaster(helper.getWritableDatabase());
         }
         return daoMaster;

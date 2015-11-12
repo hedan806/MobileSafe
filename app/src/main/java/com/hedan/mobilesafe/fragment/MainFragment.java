@@ -1,6 +1,5 @@
 package com.hedan.mobilesafe.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -22,11 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hedan.mobilesafe.R;
-import com.hedan.mobilesafe.adapter.MainUIAdapter;
+import com.hedan.mobilesafe.adapter.CommonAdapter;
+import com.hedan.mobilesafe.adapter.ViewHolder;
+import com.hedan.mobilesafe.domain.MainInfo;
 import com.hedan.mobilesafe.ui.ChatActivity;
 import com.hedan.mobilesafe.ui.LostProtecteActivity;
 import com.hedan.mobilesafe.ui.WXActivity;
 import com.hedan.mobilesafe.util.LogUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/2.
@@ -35,13 +39,15 @@ public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     private GridView gv_main;
 
-    private MainUIAdapter adapter;
     private SharedPreferences sp ;
     private AppCompatActivity parent ;
+    private CommonAdapter adapter;
+    private List<MainInfo> mDatas ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mainLayout = inflater.inflate(R.layout.main_fragment,container,false);
+
         return mainLayout;
     }
 
@@ -50,12 +56,25 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         parent = (AppCompatActivity) getActivity();
 
+        mDatas = new ArrayList<>();
+        mDatas.add(new MainInfo("手机防盗",R.drawable.icon1));
+        mDatas.add(new MainInfo("通讯卫士",R.drawable.icon2));
+        mDatas.add(new MainInfo("软件管理",R.drawable.icon3));
+        mDatas.add(new MainInfo("任务管理",R.drawable.icon4));
+        mDatas.add(new MainInfo("上网管理",R.drawable.icon7));
+        mDatas.add(new MainInfo("手机杀毒",R.drawable.icon6));
+        mDatas.add(new MainInfo("系统优化",R.drawable.icon7));
+        mDatas.add(new MainInfo("高级工具",R.drawable.icon8));
+        mDatas.add(new MainInfo("设置中心",R.drawable.icon5));
+        mDatas.add(new MainInfo("聊天界面测试",R.drawable.icon1));
+        mDatas.add(new MainInfo("微信界面UI",R.drawable.icon9));
+
         Toolbar toolbar = (Toolbar) parent.findViewById(R.id.id_base_toolbar);
         toolbar.setTitle("手机卫士");
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                LogUtil.i(TAG,item.getItemId()+"");
+                LogUtil.i(TAG, item.getItemId() + "");
                 return false;
             }
         });
@@ -63,9 +82,14 @@ public class MainFragment extends Fragment {
 
         sp = parent.getSharedPreferences("config", Context.MODE_APPEND);
         gv_main = (GridView) parent.findViewById(R.id.gv_main);
-        adapter = new MainUIAdapter(parent);
 
-        gv_main.setAdapter(adapter);
+        gv_main.setAdapter(adapter = new CommonAdapter<MainInfo>(parent.getApplicationContext(),mDatas,R.layout.mainscreen_item){
+            @Override
+            public void convert(ViewHolder helper, MainInfo item) {
+                helper.setText(R.id.tv_main_name,item.getTitle());
+                helper.setImageResourse(R.id.iv_main_item,item.getImgId());
+            }
+        });
         gv_main.setOnItemClickListener(new ItemOnClickListener());
         gv_main.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

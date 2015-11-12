@@ -66,6 +66,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.DragViewActivity" android:theme="@style/Transparent"></activity>
+        <activity android:name=".ui.CallSmsSafeActivity"></activity>
 
         <service android:name=".service.AddressService"></service>
 
