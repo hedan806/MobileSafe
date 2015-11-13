@@ -13,6 +13,8 @@ import com.hedan.dao.DaoSession;
 import com.hedan.dao.NoteDao;
 import com.hedan.mobilesafe.db.dao.BlackNumberDaoHelper;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2015/11/11.
  */
@@ -28,7 +30,8 @@ public class GreenDaoActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         BlackNumberDaoHelper blackHelper = BlackNumberDaoHelper.getInstance(this);
+        List<BlackNumber> mDatas = blackHelper.getAllData();
+
     }
 }
