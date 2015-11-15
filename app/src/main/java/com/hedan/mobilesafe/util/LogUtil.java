@@ -35,6 +35,11 @@ public class LogUtil {
             Log.w(tag,msg);
         }
     }
+    public static void e(String tag ,String msg,Exception e){
+        if(LEVEL <= ERROR){
+            Log.e(tag,msg,e);
+        }
+    }
     public static void e(String tag ,String msg){
         if(LEVEL <= ERROR){
             Log.e(tag,msg);

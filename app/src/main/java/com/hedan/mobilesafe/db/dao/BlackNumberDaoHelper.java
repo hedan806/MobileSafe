@@ -10,6 +10,8 @@ import com.hedan.mobilesafe.db.BaseDaoHelperInterface;
 
 import java.util.List;
 
+import de.greenrobot.dao.query.QueryBuilder;
+
 /**
  * Created by Administrator on 2015/11/12.
  */
@@ -19,6 +21,8 @@ public class BlackNumberDaoHelper implements BaseDaoHelperInterface<BlackNumber>
 
     public BlackNumberDaoHelper(Context context) {
         dao = BaseApplication.getDaoSession(context).getBlackNumberDao();
+        QueryBuilder.LOG_SQL = true;
+        QueryBuilder.LOG_VALUES = true;
     }
 
     public static BlackNumberDaoHelper getInstance(Context context){
@@ -26,6 +30,10 @@ public class BlackNumberDaoHelper implements BaseDaoHelperInterface<BlackNumber>
             instance = new BlackNumberDaoHelper(context);
         }
         return instance;
+    }
+
+    public BlackNumberDao getDaoInstance(){
+        return dao ;
     }
 
     @Override

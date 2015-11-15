@@ -1,5 +1,9 @@
 package com.hedan.mobilesafe.ui;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -28,6 +32,7 @@ public class NavigationViewActivity extends AppCompatActivity implements View.On
     private NavigationView mNavigationView;
     private Button toMain;
     private Button toList;
+    private Button show_notify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class NavigationViewActivity extends AppCompatActivity implements View.On
         mNavigationView = (NavigationView) findViewById(R.id.id_nav_view);
         toMain = (Button) findViewById(R.id.id_to_main);
         toList = (Button)findViewById(R.id.id_to_list);
+        show_notify = (Button)findViewById(R.id.id_notify);
 
 
 
@@ -52,6 +58,7 @@ public class NavigationViewActivity extends AppCompatActivity implements View.On
         setupNavigation(mNavigationView);
         toMain.setOnClickListener(this);
         toList.setOnClickListener(this);
+        show_notify.setOnClickListener(this);
     }
 
     private void setupNavigation(NavigationView mNavigationView) {
@@ -95,6 +102,22 @@ public class NavigationViewActivity extends AppCompatActivity implements View.On
                 Intent listIntent = new Intent(NavigationViewActivity.this, CallSmsSafeActivity.class);
                 startActivity(listIntent);
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                break;
+            case R.id.id_notify:
+                LogUtil.i(TAG,"点击了显示通知");
+                NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+                Intent notifyIntent = new Intent(this, CallSmsSafeActivity.class);
+                PendingIntent pi = PendingIntent.getActivity(this, 0, notifyIntent, 0);
+                Notification notify = new Notification.Builder(this)
+                        .setAutoCancel(true)
+                        .setTicker("拦截")
+                        .setContentTitle("拦截到黑名单号码：15211045196")
+                        .setContentText("黑名单号码：15211045196 来电，已经被拦截。")
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.logo_wx)
+                        .setContentIntent(pi)
+                        .build();
+                manager.notify(1, notify);
                 break;
         }
     }

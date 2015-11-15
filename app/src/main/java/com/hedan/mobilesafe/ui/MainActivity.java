@@ -116,6 +116,13 @@ public class MainActivity extends ToolbarActivity {
                     Log.i(TAG, "进入手机防盗界面");
                     Intent intent = new Intent(MainActivity.this, LostProtecteActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                    break;
+                case 1://通讯卫士
+                    LogUtil.i(TAG, "进入通讯卫士");
+                    Intent callSafeIntent = new Intent(MainActivity.this,CallSmsSafeActivity.class);
+                    startActivity(callSafeIntent);
+                    overridePendingTransition(R.anim.left_in,R.anim.left_out);
                     break;
                 case 7:
                     LogUtil.i(TAG, "进入高级工具");
@@ -128,10 +135,9 @@ public class MainActivity extends ToolbarActivity {
                     startActivity(chatIntent);
                     break;
                 case 10://微信UI
-                    LogUtil.i(TAG, "进入微信UI界面1");
+                    LogUtil.i(TAG, "进入微信UI界面");
                     Intent wxIntent = new Intent(MainActivity.this, WXActivity.class);
                     startActivity(wxIntent);
-                    LogUtil.i(TAG, "进入微信UI界面2");
                     break;
             }
         }
