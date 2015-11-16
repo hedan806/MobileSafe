@@ -62,4 +62,11 @@
     <string name="add_black_number">添加黑名单</string>
     <string name="to_list">ListView</string>
     <string name="show_notify">显示通知</string>
+    <string name="black_number_null">您还没有添加黑名单</string>
+    <string name="et_add_black_number">请输入要添加的号码</string>
+    <string name="et_add_black_name">请输入名称</string>
+    <string name="cb_call_intercept">电话拦截</string>
+    <string name="cb_sms_intercept">短信拦截</string>
+    <string name="add_black">添加</string>
+    <string name="add_from_contacts">从联系人添加</string>
 </resources>
