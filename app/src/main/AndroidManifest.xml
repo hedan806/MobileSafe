@@ -68,6 +68,7 @@
         </activity>
         <activity android:name=".ui.DragViewActivity" android:theme="@style/Transparent"></activity>
         <activity android:name=".ui.CallSmsSafeActivity"></activity>
+        <activity android:name=".ui.AddBlackNumberActivity"/>
 
         <service android:name=".service.AddressService"></service>
 

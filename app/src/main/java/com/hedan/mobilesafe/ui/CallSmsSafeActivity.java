@@ -2,6 +2,7 @@ package com.hedan.mobilesafe.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import com.hedan.mobilesafe.adapter.CommonAdapter;
 import com.hedan.mobilesafe.adapter.ViewHolder;
 import com.hedan.mobilesafe.db.dao.BlackNumberDaoHelper;
 import com.hedan.mobilesafe.decoration.DividerItemDecoration;
+import com.hedan.mobilesafe.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +34,7 @@ import java.util.List;
  * Created by Administrator on 2015/11/12.
  */
 public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClickListener {
+    private static final String TAG = CallSmsSafeActivity.class.getSimpleName();
     private RecyclerView rv;
     private HomeAdapter adapter;
     private Button id_add_black;
@@ -45,9 +48,18 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
         blackDaoHelper = BlackNumberDaoHelper.getInstance(this);
         mDatas = blackDaoHelper.getAllData();
         if(mDatas.size() <= 0){
+            LogUtil.i(TAG,"列表为空");
             setContentView(R.layout.call_sms_safe_main_null);
+
+            id_add_black = (Button) findViewById(R.id.id_add_black_number_null);
+            id_add_black.setOnClickListener(this);
         }else{
+            LogUtil.i(TAG,"列表有数据");
             setContentView(R.layout.call_sms_safe_main);
+
+            id_add_black = (Button) findViewById(R.id.id_add_black_number);
+            id_add_black.setOnClickListener(this);
+
             rv = (RecyclerView) findViewById(R.id.id_rv_black_list);
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(adapter = new HomeAdapter());
@@ -85,8 +97,8 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
                 }
             });
         }
-        id_add_black = (Button) findViewById(R.id.id_add_black_number);
-        id_add_black.setOnClickListener(this);
+
+
 
         getSupportActionBar().setTitle("通讯卫士");
     }
@@ -155,32 +167,14 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_add_black_number:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("添加黑名单");
-                final EditText et = new EditText(this);
-                builder.setView(et);
-                builder.setPositiveButton("添加", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String number = et.getText().toString().trim();
-                        if (TextUtils.isEmpty(number)) {
-                            Toast.makeText(getApplicationContext(), "黑名单号码不能为空", Toast.LENGTH_SHORT).show();
-                        } else {
-                            blackDaoHelper.addData(new BlackNumber(null, number, new Date()));
-                            mDatas = blackDaoHelper.getAllData();
-                            adapter.notifyItemInserted(mDatas.size());
-                        }
-                    }
-                });
-
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                builder.create().show();
+                Intent addIntent = new Intent(CallSmsSafeActivity.this,AddBlackNumberActivity.class);
+                startActivity(addIntent);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
+                break;
+            case R.id.id_add_black_number_null:
+                Intent addIntent2 = new Intent(CallSmsSafeActivity.this,AddBlackNumberActivity.class);
+                startActivity(addIntent2);
+                overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 break;
         }
     }

@@ -56,9 +56,9 @@ public class CustomTitleView extends View {
                 case R.styleable.CustomTitleView_titleText:
                     mTitleText = a.getString(attr);
                     break;
-                case R.styleable.CustomTitleView_titleTextColor:
+               /* case R.styleable.CustomTitleView_titleTextColor:
                     mTitleTextColor = a.getColor(attr, Color.BLACK);
-                    break;
+                    break;*/
                 case R.styleable.CustomTitleView_titleTextSize:
                     mTitleTextSize = a.getDimensionPixelSize(attr, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, getResources().getDisplayMetrics()));
             }
