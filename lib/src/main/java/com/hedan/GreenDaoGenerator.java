@@ -11,9 +11,9 @@ public class GreenDaoGenerator {
     public static void main(String[] args) throws Exception {
         //Schema对象接受2个参数，第一个参数是DB的版本号，通过更新版本号来更新数据库。
         // 第二个参数是自动生成代码的包路径。包路径系统自动生成
-        Schema schema = new Schema(1, "com.hedan.dao");
-        addNote(schema);
-        addCustomerOrder(schema);
+        Schema schema = new Schema(2, "com.hedan.dao");
+        //addNote(schema);
+        //addCustomerOrder(schema);
         addBlackNumber(schema);
 
         /**
@@ -30,10 +30,13 @@ public class GreenDaoGenerator {
         Entity blackNumber = schema.addEntity("BlackNumber");
         blackNumber.addIdProperty().autoincrement();
         blackNumber.addStringProperty("phone").notNull();
+        blackNumber.addStringProperty("name").notNull();
+        blackNumber.addBooleanProperty("call_intercept");
+        blackNumber.addBooleanProperty("sms_intercept");
         blackNumber.addDateProperty("ctime").notNull();
     }
 
-    private static void addCustomerOrder(Schema schema) {
+    /*private static void addCustomerOrder(Schema schema) {
 
         Entity customer = schema.addEntity("Customer");
         customer.addIdProperty();
@@ -53,21 +56,21 @@ public class GreenDaoGenerator {
     }
 
     private static void addNote(Schema schema) {
-        /**
+        *//**
          Entity表示一个实体可以对应成数据库中的表
          系统自动会以传入的参数作为表的名字，这里表名就是NOTE
          当然也可以自己设置表的名字，像这样：
          order.setTableName("ORDERS");
-         */
+         *//*
         Entity note = schema.addEntity("Note");
-        /**
+        *//**
          * 接下来是一些字段参数设置。
          如果想ID自动增长可以像这样：
          order.addIdProperty().autoincrement();
-         */
+         *//*
         note.addIdProperty();
         note.addStringProperty("text").notNull();
         note.addStringProperty("comment");
         note.addDateProperty("date");
-    }
+    }*/
 }

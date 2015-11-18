@@ -58,4 +58,28 @@
             android:text="@string/address_drag" />
     </RelativeLayout>
 
+    <include layout="@layout/base_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/id_sms_backup"
+            style="@style/text_info_style"
+            android:text="@string/id_sms_backup" />
+    </RelativeLayout>
+
+    <include layout="@layout/base_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/id_sms_restore"
+            style="@style/text_info_style"
+            android:text="@string/id_sms_restore" />
+    </RelativeLayout>
+
 </LinearLayout>

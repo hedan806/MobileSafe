@@ -10,6 +10,10 @@ public class BlackNumber {
     /** Not-null value. */
     private String phone;
     /** Not-null value. */
+    private String name;
+    private Boolean call_intercept;
+    private Boolean sms_intercept;
+    /** Not-null value. */
     private java.util.Date ctime;
 
     public BlackNumber() {
@@ -19,9 +23,12 @@ public class BlackNumber {
         this.id = id;
     }
 
-    public BlackNumber(Long id, String phone, java.util.Date ctime) {
+    public BlackNumber(Long id, String phone, String name, Boolean call_intercept, Boolean sms_intercept, java.util.Date ctime) {
         this.id = id;
         this.phone = phone;
+        this.name = name;
+        this.call_intercept = call_intercept;
+        this.sms_intercept = sms_intercept;
         this.ctime = ctime;
     }
 
@@ -41,6 +48,32 @@ public class BlackNumber {
     /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    /** Not-null value. */
+    public String getName() {
+        return name;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Boolean getCall_intercept() {
+        return call_intercept;
+    }
+
+    public void setCall_intercept(Boolean call_intercept) {
+        this.call_intercept = call_intercept;
+    }
+
+    public Boolean getSms_intercept() {
+        return sms_intercept;
+    }
+
+    public void setSms_intercept(Boolean sms_intercept) {
+        this.sms_intercept = sms_intercept;
     }
 
     /** Not-null value. */

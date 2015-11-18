@@ -69,4 +69,7 @@
     <string name="cb_sms_intercept">短信拦截</string>
     <string name="add_black">添加</string>
     <string name="add_from_contacts">从联系人添加</string>
+    <string name="hedan_title">HeDan</string>
+    <string name="id_sms_backup">短信备份</string>
+    <string name="id_sms_restore">短信还原</string>
 </resources>

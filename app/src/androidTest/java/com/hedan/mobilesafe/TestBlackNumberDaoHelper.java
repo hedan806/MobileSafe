@@ -4,6 +4,7 @@ import android.test.AndroidTestCase;
 import android.util.Log;
 
 import com.hedan.dao.BlackNumber;
+import com.hedan.dao.BlackNumberDao;
 import com.hedan.mobilesafe.db.dao.BlackNumberDaoHelper;
 import com.hedan.mobilesafe.util.LogUtil;
 import com.hedan.mobilesafe.util.MD5Encoder;
@@ -20,7 +21,7 @@ public class TestBlackNumberDaoHelper extends AndroidTestCase{
 
     public void testBlackNumberDaoAdd(){
         BlackNumberDaoHelper helper = BlackNumberDaoHelper.getInstance(getContext());
-        BlackNumber blackNumber = helper.addData(new BlackNumber(null, "123143546", new Date()));
+        BlackNumber blackNumber = helper.addData(new BlackNumber(null, "123143546","aaa",true,false, new Date()));
         LogUtil.i(TAG,blackNumber.getId() + "添加的ID");
     }
 

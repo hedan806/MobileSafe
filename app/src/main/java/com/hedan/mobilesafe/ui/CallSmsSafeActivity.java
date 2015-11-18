@@ -126,7 +126,20 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position) {
-            holder.tv.setText(mDatas.get(position).getPhone());
+            BlackNumber blackNumber = mDatas.get(position);
+            holder.tv.setText(blackNumber.getName() + "(" + blackNumber.getPhone() + ")");
+            String str = "";
+            if(blackNumber.getCall_intercept()){
+                str = "电话";
+            }
+            if(blackNumber.getSms_intercept()){
+                str = "短信";
+            }
+            if(blackNumber.getCall_intercept() && blackNumber.getSms_intercept()){
+                str = "电话、短信";
+            }
+            str += "拦截";
+            holder.tv_call_sms.setText(str);
             if (mOnItemClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -155,10 +168,12 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             TextView tv;
+            TextView tv_call_sms;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
                 tv = (TextView) itemView.findViewById(R.id.id_num);
+                tv_call_sms = (TextView) itemView.findViewById(R.id.id_call_sms);
             }
         }
     }
@@ -167,11 +182,13 @@ public class CallSmsSafeActivity extends ToolbarActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_add_black_number:
+                finish();
                 Intent addIntent = new Intent(CallSmsSafeActivity.this,AddBlackNumberActivity.class);
                 startActivity(addIntent);
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);
                 break;
             case R.id.id_add_black_number_null:
+                finish();
                 Intent addIntent2 = new Intent(CallSmsSafeActivity.this,AddBlackNumberActivity.class);
                 startActivity(addIntent2);
                 overridePendingTransition(R.anim.left_in, R.anim.left_out);

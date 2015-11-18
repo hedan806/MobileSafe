@@ -25,7 +25,10 @@ public class BlackNumberDao extends AbstractDao<BlackNumber, Long> {
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Phone = new Property(1, String.class, "phone", false, "PHONE");
-        public final static Property Ctime = new Property(2, java.util.Date.class, "ctime", false, "CTIME");
+        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
+        public final static Property Call_intercept = new Property(3, Boolean.class, "call_intercept", false, "CALL_INTERCEPT");
+        public final static Property Sms_intercept = new Property(4, Boolean.class, "sms_intercept", false, "SMS_INTERCEPT");
+        public final static Property Ctime = new Property(5, java.util.Date.class, "ctime", false, "CTIME");
     };
 
 
@@ -43,7 +46,10 @@ public class BlackNumberDao extends AbstractDao<BlackNumber, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"BLACK_NUMBER\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"PHONE\" TEXT NOT NULL ," + // 1: phone
-                "\"CTIME\" INTEGER NOT NULL );"); // 2: ctime
+                "\"NAME\" TEXT NOT NULL ," + // 2: name
+                "\"CALL_INTERCEPT\" INTEGER," + // 3: call_intercept
+                "\"SMS_INTERCEPT\" INTEGER," + // 4: sms_intercept
+                "\"CTIME\" INTEGER NOT NULL );"); // 5: ctime
     }
 
     /** Drops the underlying database table. */
@@ -62,7 +68,18 @@ public class BlackNumberDao extends AbstractDao<BlackNumber, Long> {
             stmt.bindLong(1, id);
         }
         stmt.bindString(2, entity.getPhone());
-        stmt.bindLong(3, entity.getCtime().getTime());
+        stmt.bindString(3, entity.getName());
+ 
+        Boolean call_intercept = entity.getCall_intercept();
+        if (call_intercept != null) {
+            stmt.bindLong(4, call_intercept ? 1L: 0L);
+        }
+ 
+        Boolean sms_intercept = entity.getSms_intercept();
+        if (sms_intercept != null) {
+            stmt.bindLong(5, sms_intercept ? 1L: 0L);
+        }
+        stmt.bindLong(6, entity.getCtime().getTime());
     }
 
     /** @inheritdoc */
@@ -77,7 +94,10 @@ public class BlackNumberDao extends AbstractDao<BlackNumber, Long> {
         BlackNumber entity = new BlackNumber( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // phone
-            new java.util.Date(cursor.getLong(offset + 2)) // ctime
+            cursor.getString(offset + 2), // name
+            cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0, // call_intercept
+            cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0, // sms_intercept
+            new java.util.Date(cursor.getLong(offset + 5)) // ctime
         );
         return entity;
     }
@@ -87,7 +107,10 @@ public class BlackNumberDao extends AbstractDao<BlackNumber, Long> {
     public void readEntity(Cursor cursor, BlackNumber entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setPhone(cursor.getString(offset + 1));
-        entity.setCtime(new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setName(cursor.getString(offset + 2));
+        entity.setCall_intercept(cursor.isNull(offset + 3) ? null : cursor.getShort(offset + 3) != 0);
+        entity.setSms_intercept(cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0);
+        entity.setCtime(new java.util.Date(cursor.getLong(offset + 5)));
      }
     
     /** @inheritdoc */

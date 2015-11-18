@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class AddBlackNumberActivity extends ToolbarActivity implements View.OnCl
     private Button add_from_contants;
     private EditText et_number;
     private EditText et_name;
+    private CheckBox cb_call;
+    private CheckBox cb_sms;
 
     private BlackNumberDaoHelper blackHelper;
 
@@ -37,6 +40,8 @@ public class AddBlackNumberActivity extends ToolbarActivity implements View.OnCl
         add_from_contants = (Button) findViewById(R.id.add_from_contacts);
         et_number = (EditText) findViewById(R.id.et_add_black_number);
         et_name = (EditText) findViewById(R.id.et_add_black_name);
+        cb_call = (CheckBox) findViewById(R.id.cb_call_intercept);
+        cb_sms = (CheckBox) findViewById(R.id.cb_sms_intercept);
 
         blackHelper = BlackNumberDaoHelper.getInstance(this);
 
@@ -62,15 +67,23 @@ public class AddBlackNumberActivity extends ToolbarActivity implements View.OnCl
                     return ;
                 }
 
-                blackHelper.addData(new BlackNumber(null,number,new Date()));
+                if(!cb_call.isChecked() && !cb_sms.isChecked()){
+                    Toast.makeText(getApplicationContext(),"请选择拦截方式",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                blackHelper.addData(new BlackNumber(null,number,name,cb_call.isChecked(),cb_sms.isChecked(),new Date()));
                 new AlertDialog.Builder(this)
                         .setTitle("提示")
                         .setMessage("添加成功")
                         .setPositiveButton("继续添加", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                et_number.setText("");
                                 et_name.setText("");
+                                et_number.setText("");
+                                et_number.isFocused();
+                                cb_call.setChecked(false);
+                                cb_sms.setChecked(false);
                             }
                         })
                         .setNegativeButton("添加完成", new DialogInterface.OnClickListener() {

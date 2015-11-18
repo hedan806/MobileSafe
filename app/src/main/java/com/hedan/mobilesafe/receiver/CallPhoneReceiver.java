@@ -10,13 +10,13 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.hedan.dao.BlackNumber;
 import com.hedan.dao.BlackNumberDao;
 import com.hedan.mobilesafe.R;
 import com.hedan.mobilesafe.db.dao.BlackNumberDaoHelper;
 import com.hedan.mobilesafe.ui.CallSmsSafeActivity;
 import com.hedan.mobilesafe.ui.LostProtecteActivity;
 import com.hedan.mobilesafe.util.LogUtil;
-import com.android.internal.telephony.*;
 import com.android.internal.telephony.ITelephony;
 
 import java.lang.reflect.Method;
@@ -59,28 +59,27 @@ public class CallPhoneReceiver extends BroadcastReceiver {
                     LogUtil.i(TAG, "来电号码" + number + "，响铃状态");
                     BlackNumberDao dao = BlackNumberDaoHelper.getInstance(context).getDaoInstance();
                     Query query = dao.queryBuilder().where(BlackNumberDao.Properties.Phone.eq(number)).build();
-                    List list = query.list();
-                    for (Object phone : list) {
-                        LogUtil.i(TAG, "phone : " + phone);
-                    }
-                    if (list.size() > 0) { //来电号码为拦截号码
+                    BlackNumber result = (BlackNumber) query.list().get(0);
+                    if (result != null) { //来电号码为拦截号码
                         LogUtil.i(TAG, "拦截黑名单号码：" + number);
-                        endCall();
-                        LogUtil.i(TAG, "显示通知");
-                        Toast.makeText(context.getApplicationContext(),"拦截到黑名单号码：" + number,Toast.LENGTH_LONG).show();
-                        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                        Intent notifyIntent = new Intent(context, CallSmsSafeActivity.class);
-                        PendingIntent pi = PendingIntent.getActivity(context, 0, notifyIntent, 0);
-                        Notification notify = new Notification.Builder(context)
-                                .setAutoCancel(true)
-                                .setSmallIcon(R.drawable.logo_wiki)
-                                .setTicker("拦截到黑名单号码")
-                                .setContentTitle("拦截到黑名单号码：" + number)
-                                .setContentText("黑名单号码：" + number + "来电，已经被拦截。")
-                                .setWhen(System.currentTimeMillis())
-                                .setContentIntent(pi)
-                                .build();
-                        manager.notify(1, notify);
+                        if (result.getCall_intercept()) {
+                            endCall();
+                            LogUtil.i(TAG, "显示通知");
+                            Toast.makeText(context.getApplicationContext(), "拦截到黑名单号码：" + number, Toast.LENGTH_LONG).show();
+                            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                            Intent notifyIntent = new Intent(context, CallSmsSafeActivity.class);
+                            PendingIntent pi = PendingIntent.getActivity(context, 0, notifyIntent, 0);
+                            Notification notify = new Notification.Builder(context)
+                                    .setAutoCancel(true)
+                                    .setSmallIcon(R.drawable.logo_wx)
+                                    .setTicker("拦截到黑名单号码来电")
+                                    .setContentTitle("拦截到黑名单号码：" + number)
+                                    .setContentText("黑名单号码：" + number + "来电，已经被拦截。")
+                                    .setWhen(System.currentTimeMillis())
+                                    .setContentIntent(pi)
+                                    .build();
+                            manager.notify(1, notify);
+                        }
                     } else {
                         LogUtil.i(TAG, "没有拦截");
                     }

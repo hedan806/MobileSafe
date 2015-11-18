@@ -1,6 +1,5 @@
 package com.hedan.mobilesafe.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -9,12 +8,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.ParcelUuid;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -22,8 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hedan.mobilesafe.R;
-import com.hedan.mobilesafe.engine.DownLoadFileService;
+import com.hedan.mobilesafe.domain.SmsInfo;
+import com.hedan.mobilesafe.engine.SmsInfoService;
 import com.hedan.mobilesafe.service.AddressService;
+import com.hedan.mobilesafe.service.SmsBackupService;
 import com.hedan.mobilesafe.util.HttpCallbackListener;
 import com.hedan.mobilesafe.util.HttpUtil;
 import com.hedan.mobilesafe.util.LogUtil;
@@ -41,8 +38,13 @@ public class AtoolsActivity extends ToolbarActivity implements View.OnClickListe
     private Switch phone_address;
     private ProgressDialog pd;
     private Intent serviceIntent;
+
+    private SmsInfoService smsInfoService;
+
     private TextView tv_address_style;
     private TextView tv_address_drag;
+    private TextView tv_sms_backup;
+    private TextView tv_sms_restore;
 
     private static final int SUCCESS = 10;
     private static final int ERROR = 11;
@@ -73,6 +75,9 @@ public class AtoolsActivity extends ToolbarActivity implements View.OnClickListe
         tv_query_number.setOnClickListener(this);
         tv_address_style.setOnClickListener(this);
         tv_address_drag.setOnClickListener(this);
+        tv_sms_backup.setOnClickListener(this);
+        tv_sms_restore.setOnClickListener(this);
+
         phone_address.setChecked((boolean) SharedPreferencesUtils.getParam(AtoolsActivity.this, "show_number_address", false));
         phone_address.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -98,6 +103,8 @@ public class AtoolsActivity extends ToolbarActivity implements View.OnClickListe
         phone_address = (Switch) findViewById(R.id.id_phone_address);
         tv_address_drag = (TextView) findViewById(R.id.address_drag);
         tv_address_style = (TextView) findViewById(R.id.address_style);
+        tv_sms_backup = (TextView) findViewById(R.id.id_sms_backup);
+        tv_sms_restore = (TextView) findViewById(R.id.id_sms_restore);
     }
 
     @Override
@@ -177,6 +184,31 @@ public class AtoolsActivity extends ToolbarActivity implements View.OnClickListe
             case R.id.address_drag://设置来电归属地位置
                 Intent dragIntent = new Intent(this, DragViewActivity.class);
                 startActivity(dragIntent);
+                break;
+            case R.id.id_sms_backup://短信备份
+                Intent smsBackUpIntent = new Intent(this, SmsBackupService.class);
+                startService(smsBackUpIntent);
+                break;
+            case R.id.id_sms_restore://短信还原
+                pd = new ProgressDialog(this);
+                pd.setCancelable(false);
+                pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                pd.setMessage("正在还原短信");
+                pd.show();
+                smsInfoService = new SmsInfoService(this);
+                new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+                            smsInfoService.restoreSms(Environment.getExternalStorageDirectory()+ SmsInfo.FILE_NAME,pd);
+                            pd.dismiss();
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            pd.dismiss();
+                        }
+                    }
+                }.start();
+
                 break;
         }
     }

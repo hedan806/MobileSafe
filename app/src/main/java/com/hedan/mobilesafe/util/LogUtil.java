@@ -22,17 +22,22 @@ public class LogUtil {
     }
     public static void d(String tag ,String msg){
         if(LEVEL <= DEBUG){
-            Log.d(tag,msg);
+            Log.d(tag, msg);
         }
     }
     public static void i(String tag ,String msg){
         if(LEVEL <= INFO){
-            Log.i(tag,msg);
+            Log.i(tag, msg);
         }
     }
     public static void w(String tag ,String msg){
         if(LEVEL <= WARN){
-            Log.w(tag,msg);
+            Log.w(tag, msg);
+        }
+    }
+    public static void w(String tag ,String msg,Exception e){
+        if(LEVEL <= WARN){
+            Log.w(tag,msg,e);
         }
     }
     public static void e(String tag ,String msg,Exception e){
